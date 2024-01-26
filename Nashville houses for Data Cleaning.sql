@@ -48,7 +48,7 @@ WHERE h1.parcel_id = h2.parcel_id
   AND h1.property_address IS NULL;
   
   
--- Seperate address into individual columns (Address,City,State)
+-- Seperate property address into individual columns (Address,City)
 
 SELECT property_address FROM house
 
