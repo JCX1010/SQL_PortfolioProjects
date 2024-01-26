@@ -158,6 +158,21 @@ FROM house
 SELECT * FROM cte 
 WHERE cte.rn > 1
 
+-- Alternative solution to remove duplicates (using backup table)
+
+CREATE TABLE house_bkp AS
+SELECT DISTINCT ON (parcel_id, property_address, sale_price, sale_date, legal_reference)
+  *
+FROM house
+ORDER BY parcel_id, property_address, sale_price, sale_date, legal_reference
+
+TRUNCATE TABLE house;
+
+insert into house
+SELECT * FROM house_bkp;
+
+DROP TABLE house_bkp;
+
 -- Delete unwanted columns
 
 ALTER TABLE house
